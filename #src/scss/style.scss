@@ -1,0 +1,340 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+
+@font-face {
+font-family: $font_name;
+font-display: swap;
+src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+font-weight: #{$weight};
+font-style: #{$style};
+}
+}
+
+@import "normalize";
+@import "fonts";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+body{
+	background-color: #e5eeea;
+	font-family: 'BryndanWriteBook';
+	font-size: 2rem;
+	color: #4f5a6e;
+	overflow-x: hidden;
+	touch-action: none;
+}
+
+
+.wrapper {
+	position: relative;
+	overflow-x: hidden;
+	min-height: 100%;
+}
+.todo {
+		padding: 80px 15px 160px 15px;
+		max-width: 800px;
+		margin: 0 auto;
+		// .todo__header
+
+		&__header {
+			background-color: #dddef0;
+			padding: 50px 0;
+			border-radius: 15px;
+			margin: 0px 0px 20px 0px;
+		}
+
+		// .todo__title
+
+		&__title {
+			text-align: center;
+			color: #5b5fe3;
+			font-weight: 700;
+			font-size: 100px;
+			
+		}
+
+		// .todo__body
+
+		&__body {
+		}
+
+		// .todo__list
+
+		&__list {
+			margin: 0px 0px 20px 0px;
+			transition: height 0.4s ease-in-out;
+			// position: relative;
+			
+		}
+
+		&__item{
+			&:not(:last-child){
+				margin: 0px 0px 20px 0px;
+			}
+		}
+}
+
+.item {
+	cursor: grab;
+	touch-action: none;
+	background-color: #fff;
+	border-radius: 30px;
+	overflow: hidden;
+	box-shadow: 0px 0px 15px 1px rgba(91, 95, 227,0.2);
+		&.completed .item__title{
+			text-decoration: line-through;
+			opacity: 0.5;
+		}
+		&.below{
+			opacity: 0.7;
+		}
+		// .item__body
+
+		&__body {
+			display: flex;
+			align-items: center;
+			min-height: 60px;
+			padding: 5px 15px;
+			@media(max-width: 479px){
+				padding: 5px 10px;
+			}
+		}
+
+		// .item__column
+
+		&__column {
+			
+			&_1{
+				margin: 0px 10px 0px 0px;
+				flex: 1 1 auto;
+				overflow: hidden;
+				
+			}
+			&_2{
+				flex: 0 0 80px;
+			}
+			@media(max-width: 479px){
+				&_2{
+					flex: 0 0 75px;
+				}
+			}
+		}
+
+		// .item__title
+
+		&__title {
+			font-size: 2rem;
+			@media(max-width: 479px){
+				font-size: 1.7rem;
+			}
+		}
+}
+.item-buttons {
+		display: flex;
+		justify-content: space-between;
+		height: 35px;
+		// .item-buttons__column
+
+		&__checked-btns{
+			position: relative;
+			flex: 0 0 35px;
+		}
+
+		// .item-buttons__checkbox
+
+		&__checkbox {
+			width: 35px;
+			height: 35px;
+			cursor: pointer;
+			position: absolute;
+			opacity: 0;
+			z-index: 10;
+		}
+
+
+		&__checkbox.checked + .item-buttons__customcheckbox{
+			background-color: #3edf81;
+			i{
+				display: block;
+			}
+		}
+
+		// .item-buttons__customcheckbox
+
+		&__customcheckbox {
+			box-shadow: 0px 0px 10px 1px rgba(91, 95, 227,0.2);
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			background-color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			i{
+				display: none;
+				font-size: 20px;
+				color: #fff;
+			}
+		}
+
+		// .item-buttons__close
+
+		&__close {
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			background: none;
+			box-shadow: 0px 0px 10px 1px rgba(91, 95, 227,0.2);
+			background-color: rgb(253, 108, 108);
+			border-radius: 50%;
+			position: relative;
+			transition: all 0.2s ease-in-out;
+			padding: 0;
+			margin: 0;
+			&::before,
+			&::after{
+				content: '';
+				display: block;
+				width: 20px;
+				height: 4px;
+				border-radius: 30px;
+				background-color: #fff;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+			}
+			&:before{
+				transform: translate(-50%,-50%) rotate(-45deg);
+			}
+			&:after{
+				transform: translate(-50%,-50%) rotate(45deg);
+			}
+		}
+}
+
+.form-todo {
+		position: relative;	
+		// .form-todo__wrapper
+
+		&__wrapper {
+			// overflow: hidden;
+			background-color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-radius: 30px;
+			height: 60px;
+			box-shadow: 0px 0px 15px 1px rgba(91, 95, 227,0.2);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.5s ease 0s;
+			z-index: 11;
+			max-width: 100%;
+			&.active{
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+
+		&__input{
+			flex: 1 1 auto;
+			padding: 0 20px;
+			height: 100%;
+			font-size: 25px;
+			border-radius: 30px 0 0px 30px;
+			width: 100%;
+			border:none;
+			background-image:none;
+			background-color:transparent;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+			list-style: none;
+			&:focus{
+				background: none;
+			}
+		}
+
+		&__button{
+			flex: 0 0 100px;
+			width: 100px;
+			background-color: #7377ec;
+			height: 100%;
+			border-radius: 30px;
+			color: #fff;
+			font-size: 25px;
+			transition: all 0.2s ease 0s;
+			&:hover{
+				background-color: #5b60e9;
+			}
+			@media(max-width: 479px){
+				flex: 0 0 60px;
+			}
+		}
+
+		// .form-todo__add
+
+		&__plus {
+			cursor: pointer;
+			width: 60px;
+			height: 60px;
+			background-color: #5b5fe3;
+			border-radius: 50%;
+			position: absolute;
+			left: 50%;
+			top: 0;
+			z-index: 10;
+			transform: translate(-50%,0);
+			transition: all 0.4s ease 0s;
+			&.active{
+				transform: translate(-50%, 130%) rotate(45deg);
+				opacity: 0.7;
+			}
+			&::before,
+			&::after{
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 30px;
+				height: 5px;
+				background-color: #fff;
+				border-radius: 25px;
+			}
+			&::before{
+				transform: translate(-50%,-50%);
+			}
+			&::after{
+				transform: translate(-50%,-50%) rotate(-90deg);
+			}
+		}
+}
+
+.warning{
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -110%);
+	color: #fff;
+	background-color: rgb(253, 108, 108);
+	max-width: 1000px;
+	width: 100%;
+	height: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	border-radius: 30px;
+	padding: 0px 10px 60px 10px;
+	transition: all 0.4s ease 0s;
+	text-align: center;
+	&.active{
+		transform: translate(-50%, -80%);
+	}
+}

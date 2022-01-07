@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="css/style.min.css">
+	<title>My Todo</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="todo" id="todo">
+			<div class="todo__header">
+				<h1 class="todo__title">Todo</h1>
+			</div>
+			<div class="todo__body">
+				<ul class="todo__list" id="todo-list">
+				</ul>
+				<form class="todo__form form-todo" id="form-todo">
+					<div class="form-todo__wrapper" id="form-todo-wrapper">
+						<input type="text" class="form-todo__input" id="form-input" autocomplete="off" autofocus>
+						<button type="submit" class="form-todo__button" id="add">add</button>
+					</div>
+					<div class="form-todo__plus" id="open-btn">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="warning" id="warning">
+		Строка ввода не может быть пустой
+	</div>
+
+	<script src="js/script.min.js"></script>
+</body>
+
+</html>
